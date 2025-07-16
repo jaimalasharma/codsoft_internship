@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone - Watch TV Shows Online, Watch Movies Online</title>
+    <meta name="description" content="Netflix clone - Watch Netflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://picsum.photos/1920/1080?random=1');
+            background-size: cover;
+            background-position: center;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        .faq-item {
+            background-color: rgba(45, 45, 45, 0.8);
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header -->
+    <header class="absolute w-full z-10">
+        <nav class="flex justify-between items-center px-12 py-4">
+            <div class="flex items-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" class="h-12">
+            </div>
+            <div>
+                <button class="bg-red-600 text-white px-4 py-1 rounded mr-4">Sign In</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero min-h-screen flex items-center justify-center text-center px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl font-bold mb-4">Unlimited movies, TV shows, and more.</h1>
+            <h2 class="text-2xl mb-6">Watch anywhere. Cancel anytime.</h2>
+            <p class="text-xl mb-8">Ready to watch? Enter your email to create or restart your membership.</p>
+            <div class="flex flex-col md:flex-row gap-2 max-w-2xl mx-auto">
+                <input type="email" placeholder="Email address" class="flex-grow px-4 py-4 bg-black bg-opacity-50 border border-gray-600 rounded">
+                <button class="bg-red-600 text-white px-8 py-4 text-xl font-bold rounded flex items-center">
+                    Get Started <i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 border-t-8 border-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-16">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-4xl font-bold mb-4">Enjoy on your TV.</h2>
+                    <p class="text-xl">Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players, and more.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://picsum.photos/600/400?random=2" alt="TV" class="w-full rounded">
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row-reverse items-center justify-between mb-16">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
+                    <h2 class="text-4xl font-bold mb-4">Download your shows to watch offline.</h2>
+                    <p class="text-xl">Save your favorites easily and always have something to watch.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://picsum.photos/600/400?random=3" alt="Mobile" class="w-full rounded">
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between mb-16">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-4xl font-bold mb-4">Watch everywhere.</h2>
+                    <p class="text-xl">Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://picsum.photos/600/400?random=4" alt="Devices" class="w-full rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shows Section -->
+    <section class="py-16 border-t-8 border-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8">Popular on Netflix</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="card">
+                    <img src="https://picsum.photos/200/300?random=5" alt="Show 1" class="w-full rounded" loading="lazy">
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/200/300?random=6" alt="Show 2" class="w-full rounded" loading="lazy">
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/200/300?random=7" alt="Show 3" class="w-full rounded" loading="lazy">
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/200/300?random=8" alt="Show 4" class="w-full rounded" loading="lazy">
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/200/300?random=9" alt="Show 5" class="w-full rounded" loading="lazy">
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/200/300?random=10" alt="Show 6" class="w-full rounded" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 border-t-8 border-gray-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item p-5 cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl">What is Netflix?</h3>
+                        <i class="fas fa-plus text-2xl"></i>
+                    </div>
+                    <div class="faq-answer hidden mt-4">
+                        <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.</p>
+                    </div>
+                </div>
+                <div class="faq-item p-5 cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl">How much does Netflix cost?</h3>
+                        <i class="fas fa-plus text-2xl"></i>
+                    </div>
+                    <div class="faq-answer hidden mt-4">
+                        <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from $8.99 to $17.99 a month. No extra costs, no contracts.</p>
+                    </div>
+                </div>
+                <div class="faq-item p-5 cursor-pointer">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl">Where can I watch?</h3>
+                        <i class="fas fa-plus text-2xl"></i>
+                    </div>
+                    <div class="faq-answer hidden mt-4">
+                        <p>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-xl mb-6">Ready to watch? Enter your email to create or restart your membership.</p>
+                <div class="flex flex-col md:flex-row gap-2 max-w-2xl mx-auto">
+                    <input type="email" placeholder="Email address" class="flex-grow px-4 py-4 bg-black bg-opacity-50 border border-gray-600 rounded">
+                    <button class="bg-red-600 text-white px-8 py-4 text-xl font-bold rounded flex items-center justify-center">
+                        Get Started <i class="fas fa-chevron-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t-8 border-gray-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="mb-8">Questions? Call 1-844-505-2993</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Investor Relations</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Ways to Watch</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Corporate Information</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Jobs</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Terms of Use</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Account</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Redeem Gift Cards</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Privacy</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Speed Test</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Media Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Buy Gift Cards</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Cookie Preferences</a></li>
+                        <li class="mb-2"><a href="#" class="text-gray-400 hover:underline">Legal Notices</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-gray-400">Netflix Clone</p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                if (answer.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-plus');
+                } else {
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-times');
+                }
+            });
+        });
+
+        // Navigation functionality
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                if (href === '#') {
+                    return;
+                }
+                // In a real app, you would navigate to the href
+                console.log(`Navigating to ${href}`);
+            });
+        });
+
+        // Form submission
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = form.querySelector('input[type="email"]').value;
+                if (email) {
+                    alert(`Thank you! We'll contact you at ${email}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

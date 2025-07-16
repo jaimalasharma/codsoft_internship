@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaymala Sharma | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4a42e8;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--darker);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.2), rgba(74, 66, 232, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            border-radius: 0.5rem;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .skill-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .section {
+            scroll-margin-top: 100px;
+        }
+        
+        .contact-input {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: 3px solid var(--darker);
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-opacity-90 bg-gray-900 backdrop-filter backdrop-blur-lg z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-xl font-bold gradient-text">Jaymala Sharma</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#skills" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="#projects" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#experience" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                        <a href="#contact" class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Skills</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Projects</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Experience</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="gradient-text">Jaymala Sharma</span></h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">Creative <span class="gradient-text">Developer</span> & <span class="gradient-text">Designer</span></h2>
+                    <p class="text-lg text-gray-400 mb-8 max-w-lg">I build exceptional digital experiences that are fast, accessible, visually appealing, and responsive.</p>
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="btn-primary text-white px-6 py-3 rounded-lg font-medium">View My Work</a>
+                        <a href="#contact" class="border border-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition">Contact Me</a>
+                    </div>
+                    <div class="flex mt-8 space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-dribbble fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden floating">
+                        <img src="1.jfif" 
+                             alt="Jaymala Sharma" 
+                             class="w-full h-full object-cover rounded-lg shadow-xl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <p class="text-white font-medium">Based in New Delhi, India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About <span class="gradient-text">Me</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 mx-auto mb-8"></div>
+                <p class="text-gray-400 max-w-3xl mx-auto">Get to know me better</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative w-64 h-64 rounded-lg overflow-hidden shadow-xl">
+                        <img src="1.jfif" 
+                             alt="Jaymala Sharma" 
+                             class="w-full h-full object-cover rounded-lg">
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-semibold mb-6">Who am I?</h3>
+                    <p class="text-gray-400 mb-6">I'm Jaymala Sharma, a passionate developer and designer with over 5 years of experience creating digital products that users love. I specialize in front-end development, UI/UX design, and creating seamless user experiences.</p>
+                    <p class="text-gray-400 mb-6">My journey in tech began when I was studying Computer Science at Delhi University. Since then, I've worked with startups and established companies to bring their digital visions to life.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div>
+                            <p class="text-gray-400"><span class="font-medium text-white">Name:</span> Jaymala Sharma</p>
+                            <p class="text-gray-400"><span class="font-medium text-white">Email:</span> jaymala@example.com</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400"><span class="font-medium text-white">From:</span> New Delhi, India</p>
+                            <p class="text-gray-400"><span class="font-medium text-white">Freelance:</span> Available</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">Download CV</a>
+                        <a href="#contact" class="border border-gray-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-800 transition">Hire Me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Skills</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 mx-auto mb-8"></div>
+                <p class="text-gray-400 max-w-3xl mx-auto">Technologies I work with</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-html5"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">HTML5</h3>
+                    <p class="text-gray-400">Advanced</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-css3-alt"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">CSS3</h3>
+                    <p class="text-gray-400">Advanced</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-js"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">JavaScript</h3>
+                    <p class="text-gray-400">Advanced</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-react"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">React</h3>
+                    <p class="text-gray-400">Advanced</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-node-js"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Node.js</h3>
+                    <p class="text-gray-400">Intermediate</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-figma"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Figma</h3>
+                    <p class="text-gray-400">Advanced</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fas fa-database"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">MongoDB</h3>
+                    <p class="text-gray-400">Intermediate</p>
+                </div>
+                <div class="skill-badge bg-gray-900 p-6 rounded-lg text-center hover:shadow-lg">
+                    <div class="text-4xl mb-3 gradient-text"><i class="fab fa-git-alt"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Git</h3>
+                    <p class="text-gray-400">Advanced</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Projects</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 mx-auto mb-8"></div>
+                <p class="text-gray-400 max-w-3xl mx-auto">Some of my recent work</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="E-commerce Dashboard" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">E-commerce Dashboard</h3>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">2023</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">A comprehensive dashboard for e-commerce businesses with analytics, inventory management, and customer insights.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">React</span>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">Node.js</span>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">MongoDB</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555774698-0f77e70ac5e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Fitness App" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">Fitness Tracker</h3>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">2022</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">A mobile-first fitness application that tracks workouts, nutrition, and progress with personalized recommendations.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">React Native</span>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">Firebase</span>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">Redux</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden shadow-lg relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8b9c40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+                             alt="Travel Blog" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">Travel Blog Platform</h3>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">2023</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">A platform for travel enthusiasts to share their experiences, with interactive maps and photo galleries.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">Next.js</span>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">Tailwind CSS</span>
+                            <span class="text-xs px-2 py-1 bg-gray-700 rounded-full">Sanity.io</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block border border-gray-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="gradient-text">Experience</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 mx-auto mb-8"></div>
+                <p class="text-gray-400 max-w-3xl mx-auto">My professional journey</p>
+            </div>
+            <div class="relative pl-8 md:pl-16 timeline">
+                <!-- Experience 1 -->
+                <div class="relative mb-12 timeline-item">
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">Senior Frontend Developer</h3>
+                            <span class="text-sm px-3 py-1 bg-gray-700 rounded-full">2021 - Present</span>
+                        </div>
+                        <h4 class="text-gray-400 font-medium mb-4">TechSolutions Inc.</h4>
+                        <p class="text-gray-400">Leading the frontend development team, implementing new features, optimizing performance, and mentoring junior developers.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="relative mb-12 timeline-item">
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">UI/UX Designer & Developer</h3>
+                            <span class="text-sm px-3 py-1 bg-gray-700 rounded-full">2019 - 2021</span>
+                        </div>
+                        <h4 class="text-gray-400 font-medium mb-4">Digital Creations</h4>
+                        <p class="text-gray-400">Designed and developed user interfaces for web applications, conducted user research, and created design systems.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="relative mb-12 timeline-item">
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">Frontend Developer</h3>
+                            <span class="text-sm px-3 py-1 bg-gray-700 rounded-full">2017 - 2019</span>
+                        </div>
+                        <h4 class="text-gray-400 font-medium mb-4">WebWorks Agency</h4>
+                        <p class="text-gray-400">Developed responsive websites and web applications for clients across various industries using modern frontend technologies.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 4 -->
+                <div class="relative timeline-item">
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold">Web Development Intern</h3>
+                            <span class="text-sm px-3 py-1 bg-gray-700 rounded-full">2016 - 2017</span>
+                        </div>
+                        <h4 class="text-gray-400 font-medium mb-4">StartUp Labs</h4>
+                        <p class="text-gray-400">Assisted in developing and maintaining company websites, learned industry best practices, and contributed to small projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-indigo-600 mx-auto mb-8"></div>
+                <p class="text-gray-400 max-w-3xl mx-auto">Have a project in mind or want to collaborate? Feel free to reach out!</p>
+            </div>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8">
+                    <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                    <p class="text-gray-400 mb-8">I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4 mt-1 gradient-text"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4 class="font-medium">Email</h4>
+                                <p class="text-gray-400">jaymala@example.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4 mt-1 gradient-text"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <h4 class="font-medium">Phone</h4>
+                                <p class="text-gray-400">+91 98765 43210</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4 mt-1 gradient-text"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4 class="font-medium">Location</h4>
+                                <p class="text-gray-400">New Delhi, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="font-medium mb-4">Follow Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition"><i class="fab fa-github"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition"><i class="fab fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-1">Your Name</label>
+                                <input type="text" id="name" class="w-full contact-input px-4 py-3 rounded-lg focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-1">Your Email</label>
+                                <input type="email" id="email" class="w-full contact-input px-4 py-3 rounded-lg focus:outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-1">Subject</label>
+                            <input type="text" id="subject" class="w-full contact-input px-4 py-3 rounded-lg focus:outline-none">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-1">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full contact-input px-4 py-3 rounded-lg focus:outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-medium w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <span class="text-xl font-bold gradient-text">Jaymala Sharma</span>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    © 2023 Jaymala Sharma. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = function() {
+            const elements = document.querySelectorAll('.project-card, .skill-badge, .timeline-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial styles for animation
+        document.querySelectorAll('.project-card, .skill-badge').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        document.querySelectorAll('.timeline-item').forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateX(20px)';
+            element.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+        });
+
+        // Run animation on load and scroll
+        window.addEventListener('load', animateOnScroll);
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>

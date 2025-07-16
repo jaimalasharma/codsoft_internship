@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Scientific Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .calculator:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .display {
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn {
+            transition: all 0.2s ease;
+            transform: translateY(0);
+        }
+        
+        .btn:active {
+            transform: translateY(2px);
+        }
+        
+        .btn-operator {
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+        }
+        
+        .btn-function {
+            background: linear-gradient(145deg, #10b981, #059669);
+        }
+        
+        .btn-equals {
+            background: linear-gradient(145deg, #f59e0b, #d97706);
+        }
+        
+        .btn-clear {
+            background: linear-gradient(145deg, #ef4444, #dc2626);
+        }
+        
+        .btn-memory {
+            background: linear-gradient(145deg, #8b5cf6, #7c3aed);
+        }
+        
+        .history-panel {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .history-panel.active {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 640px) {
+            .calculator {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="calculator bg-white w-full max-w-md">
+        <!-- Display Area -->
+        <div class="display bg-gray-900 p-4 text-right text-white flex flex-col">
+            <div class="memory-indicators flex justify-start space-x-2 mb-2">
+                <span id="memory-indicator" class="text-xs bg-purple-600 px-2 py-1 rounded hidden">M</span>
+            </div>
+            <div id="history" class="text-gray-400 text-sm h-6 overflow-x-auto whitespace-nowrap"></div>
+            <div id="result" class="text-4xl font-semibold mt-2 overflow-x-auto whitespace-nowrap">0</div>
+        </div>
+        
+        <!-- Button Grid -->
+        <div class="grid grid-cols-5 gap-1 p-2 bg-gray-100">
+            <!-- Memory Functions -->
+            <button onclick="memoryClear()" class="btn btn-memory text-white p-3 rounded-lg font-medium">MC</button>
+            <button onclick="memoryRecall()" class="btn btn-memory text-white p-3 rounded-lg font-medium">MR</button>
+            <button onclick="memoryAdd()" class="btn btn-memory text-white p-3 rounded-lg font-medium">M+</button>
+            <button onclick="memorySubtract()" class="btn btn-memory text-white p-3 rounded-lg font-medium">M-</button>
+            <button onclick="toggleHistory()" class="btn bg-gray-300 p-3 rounded-lg font-medium">
+                <i class="fas fa-history"></i>
+            </button>
+            
+            <!-- First Row -->
+            <button onclick="clearAll()" class="btn btn-clear text-white p-3 rounded-lg font-medium">AC</button>
+            <button onclick="deleteLastChar()" class="btn bg-gray-300 p-3 rounded-lg font-medium">
+                <i class="fas fa-backspace"></i>
+            </button>
+            <button onclick="appendToDisplay('%')" class="btn btn-function text-white p-3 rounded-lg font-medium">%</button>
+            <button onclick="appendToDisplay('(')" class="btn btn-function text-white p-3 rounded-lg font-medium">(</button>
+            <button onclick="appendToDisplay(')')" class="btn btn-function text-white p-3 rounded-lg font-medium">)</button>
+            
+            <!-- Second Row -->
+            <button onclick="appendToDisplay('sin(')" class="btn btn-function text-white p-3 rounded-lg font-medium">sin</button>
+            <button onclick="appendToDisplay('cos(')" class="btn btn-function text-white p-3 rounded-lg font-medium">cos</button>
+            <button onclick="appendToDisplay('tan(')" class="btn btn-function text-white p-3 rounded-lg font-medium">tan</button>
+            <button onclick="appendToDisplay('^')" class="btn btn-function text-white p-3 rounded-lg font-medium">x^y</button>
+            <button onclick="appendToDisplay('√(')" class="btn btn-function text-white p-3 rounded-lg font-medium">√</button>
+            
+            <!-- Third Row -->
+            <button onclick="appendToDisplay('π')" class="btn btn-function text-white p-3 rounded-lg font-medium">π</button>
+            <button onclick="appendToDisplay('log(')" class="btn btn-function text-white p-3 rounded-lg font-medium">log</button>
+            <button onclick="appendToDisplay('ln(')" class="btn btn-function text-white p-3 rounded-lg font-medium">ln</button>
+            <button onclick="appendToDisplay('!')" class="btn btn-function text-white p-3 rounded-lg font-medium">n!</button>
+            <button onclick="appendToDisplay('/')" class="btn btn-operator text-white p-3 rounded-lg font-medium">÷</button>
+            
+            <!-- Fourth Row -->
+            <button onclick="appendToDisplay('7')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">7</button>
+            <button onclick="appendToDisplay('8')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">8</button>
+            <button onclick="appendToDisplay('9')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">9</button>
+            <button onclick="appendToDisplay('*')" class="btn btn-operator text-white p-3 rounded-lg font-medium">×</button>
+            <button onclick="appendToDisplay('1e')" class="btn btn-function text-white p-3 rounded-lg font-medium">e</button>
+            
+            <!-- Fifth Row -->
+            <button onclick="appendToDisplay('4')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">4</button>
+            <button onclick="appendToDisplay('5')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">5</button>
+            <button onclick="appendToDisplay('6')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">6</button>
+            <button onclick="appendToDisplay('-')" class="btn btn-operator text-white p-3 rounded-lg font-medium">-</button>
+            <button onclick="appendToDisplay('1e2')" class="btn btn-function text-white p-3 rounded-lg font-medium">10^x</button>
+            
+            <!-- Sixth Row -->
+            <button onclick="appendToDisplay('1')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">1</button>
+            <button onclick="appendToDisplay('2')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">2</button>
+            <button onclick="appendToDisplay('3')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">3</button>
+            <button onclick="appendToDisplay('+')" class="btn btn-operator text-white p-3 rounded-lg font-medium">+</button>
+            <button onclick="calculate()" class="btn btn-equals text-white p-3 rounded-lg font-medium row-span-1">=</button>
+            
+            <!-- Seventh Row -->
+            <button onclick="appendToDisplay('0')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium col-span-2">0</button>
+            <button onclick="appendToDisplay('.')" class="btn bg-gray-200 hover:bg-gray-300 p-3 rounded-lg font-medium">.</button>
+            <button onclick="appendToDisplay('Math.PI')" class="btn btn-function text-white p-3 rounded-lg font-medium">π</button>
+            <button onclick="toggleSign()" class="btn btn-function text-white p-3 rounded-lg font-medium">+/-</button>
+        </div>
+    </div>
+    
+    <!-- History Panel -->
+    <div class="history-panel fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-10 p-4 overflow-y-auto">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">Calculation History</h2>
+            <button onclick="toggleHistory()" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul id="history-list" class="space-y-2">
+            <!-- History items will be added here -->
+        </ul>
+        <button onclick="clearHistory()" class="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">
+            Clear History
+        </button>
+    </div>
+
+    <script>
+        // Calculator state
+        let currentInput = '0';
+        let calculationHistory = [];
+        let memoryValue = 0;
+        let isHistoryOpen = false;
+        
+        // DOM elements
+        const resultElement = document.getElementById('result');
+        const historyElement = document.getElementById('history');
+        const historyListElement = document.getElementById('history-list');
+        const memoryIndicator = document.getElementById('memory-indicator');
+        const historyPanel = document.querySelector('.history-panel');
+        
+        // Initialize display
+        updateDisplay();
+        
+        // Append to display
+        function appendToDisplay(value) {
+            if (currentInput === '0' && value !== '.') {
+                currentInput = value;
+            } else {
+                // Handle special cases
+                if (value === 'π') {
+                    currentInput += Math.PI.toString();
+                } else if (value === '1e') {
+                    currentInput += 'Math.E';
+                } else if (value === '1e2') {
+                    currentInput += '*10^';
+                } else {
+                    currentInput += value;
+                }
+            }
+            updateDisplay();
+        }
+        
+        // Clear all
+        function clearAll() {
+            currentInput = '0';
+            updateDisplay();
+        }
+        
+        // Delete last character
+        function deleteLastChar() {
+            if (currentInput.length === 1) {
+                currentInput = '0';
+            } else {
+                currentInput = currentInput.slice(0, -1);
+            }
+            updateDisplay();
+        }
+        
+        // Toggle sign
+        function toggleSign() {
+            if (currentInput.startsWith('-')) {
+                currentInput = currentInput.substring(1);
+            } else {
+                currentInput = '-' + currentInput;
+            }
+            updateDisplay();
+        }
+        
+        // Calculate result
+        function calculate() {
+            try {
+                // Replace display-friendly symbols with JavaScript equivalents
+                let expression = currentInput
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/\^/g, '**')
+                    .replace(/√\(/g, 'Math.sqrt(')
+                    .replace(/sin\(/g, 'Math.sin(')
+                    .replace(/cos\(/g, 'Math.cos(')
+                    .replace(/tan\(/g, 'Math.tan(')
+                    .replace(/log\(/g, 'Math.log10(')
+                    .replace(/ln\(/g, 'Math.log(')
+                    .replace(/π/g, 'Math.PI')
+                    .replace(/!([\d.]+)/g, 'factorial($1)');
+                
+                // Handle percentage
+                if (expression.includes('%')) {
+                    const parts = expression.split('%');
+                    if (parts.length === 2) {
+                        expression = `${parts[0]}/100*${parts[1]}`;
+                    } else {
+                        expression = `${parts[0]}/100`;
+                    }
+                }
+                
+                // Evaluate the expression
+                const result = eval(expression);
+                
+                // Add to history
+                addToHistory(currentInput, result);
+                
+                // Update display with result
+                currentInput = result.toString();
+                updateDisplay();
+            } catch (error) {
+                currentInput = 'Error';
+                updateDisplay();
+                setTimeout(clearAll, 1500);
+            }
+        }
+        
+        // Factorial function
+        function factorial(n) {
+            if (n < 0) return NaN;
+            if (n === 0 || n === 1) return 1;
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+        
+        // Memory functions
+        function memoryClear() {
+            memoryValue = 0;
+            memoryIndicator.classList.add('hidden');
+        }
+        
+        function memoryRecall() {
+            currentInput = memoryValue.toString();
+            updateDisplay();
+        }
+        
+        function memoryAdd() {
+            try {
+                const currentValue = parseFloat(eval(currentInput));
+                memoryValue += currentValue;
+                memoryIndicator.classList.remove('hidden');
+            } catch (error) {
+                currentInput = 'Error';
+                updateDisplay();
+                setTimeout(clearAll, 1500);
+            }
+        }
+        
+        function memorySubtract() {
+            try {
+                const currentValue = parseFloat(eval(currentInput));
+                memoryValue -= currentValue;
+                memoryIndicator.classList.remove('hidden');
+            } catch (error) {
+                currentInput = 'Error';
+                updateDisplay();
+                setTimeout(clearAll, 1500);
+            }
+        }
+        
+        // History functions
+        function addToHistory(expression, result) {
+            const historyItem = {
+                expression,
+                result,
+                timestamp: new Date().toLocaleTimeString()
+            };
+            calculationHistory.unshift(historyItem);
+            updateHistoryDisplay();
+        }
+        
+        function updateHistoryDisplay() {
+            historyListElement.innerHTML = '';
+            calculationHistory.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'border-b border-gray-200 pb-2';
+                li.innerHTML = `
+                    <div class="text-sm text-gray-500">${item.timestamp}</div>
+                    <div class="font-medium">${item.expression}</div>
+                    <div class="text-right font-bold">= ${item.result}</div>
+                `;
+                li.addEventListener('click', () => {
+                    currentInput = item.expression;
+                    updateDisplay();
+                });
+                historyListElement.appendChild(li);
+            });
+        }
+        
+        function clearHistory() {
+            calculationHistory = [];
+            updateHistoryDisplay();
+        }
+        
+        function toggleHistory() {
+            isHistoryOpen = !isHistoryOpen;
+            if (isHistoryOpen) {
+                historyPanel.classList.add('active');
+            } else {
+                historyPanel.classList.remove('active');
+            }
+        }
+        
+        // Update display
+        function updateDisplay() {
+            resultElement.textContent = currentInput;
+            historyElement.textContent = currentInput === '0' ? '' : currentInput;
+        }
+        
+        // Keyboard support
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            
+            if (/[0-9]/.test(key)) {
+                appendToDisplay(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                appendToDisplay(key);
+            } else if (key === 'Enter' || key === '=') {
+                event.preventDefault();
+                calculate();
+            } else if (key === '.') {
+                appendToDisplay('.');
+            } else if (key === 'Escape') {
+                clearAll();
+            } else if (key === 'Backspace') {
+                deleteLastChar();
+            } else if (key === '(' || key === ')') {
+                appendToDisplay(key);
+            } else if (key === '%') {
+                appendToDisplay('%');
+            } else if (key === '^') {
+                appendToDisplay('^');
+            }
+        });
+    </script>
+</body>
+</html>
